@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Painel de Login com JWT
 
-## Getting Started
+Painel de autenticação construído com React e Next.js, consumindo uma API fake (DummyJSON) para praticar o fluxo completo de login com JWT — desde o armazenamento seguro do token até a proteção de rotas.
 
-First, run the development server:
+## 🎯 Objetivo
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Projeto de estudo com foco em aprender fluxo de autenticação no front-end e gerenciamento de estado/sessão.
+
+## 🚀 Tecnologias
+
+- [React](https://react.dev/)
+- [Next.js](https://nextjs.org/)
+- [Axios](https://axios-http.com/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [TanStack Query](https://tanstack.com/query/latest)
+- [DummyJSON](https://dummyjson.com/) — API fake usada para autenticação
+
+## 📚 Conceitos praticados
+
+- Formulários controlados e validação
+- Armazenamento seguro do token via cookie `httpOnly`
+- API routes do Next.js como camada intermediária (front-end → rota própria → DummyJSON)
+- Rotas protegidas com middleware do Next.js
+- Gerenciamento de estado de servidor com TanStack Query (cache, loading, erro)
+- Interceptação de requisições com Axios
+- Expiração e refresh de token
+- Tratamento de erros de autenticação (401/403)
+
+## 🏗️ Arquitetura
+
+O front-end não se comunica diretamente com a DummyJSON. O fluxo é:
+
+```
+React (formulário de login)
+   ↓
+API route própria do Next.js (/api/login)
+   ↓
+DummyJSON (/auth/login)
+   ↓
+API route seta o cookie httpOnly na resposta
+   ↓
+Middleware do Next.js valida o cookie em rotas protegidas
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Essa camada intermediária existe porque cookies `httpOnly` só podem ser criados pelo servidor (via header `Set-Cookie`), nunca pelo JavaScript do navegador.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ⚙️ Como rodar o projeto
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+# Clonar o repositório
+git clone https://github.com/Fguimaraes12/auth-panel-jwt.git
 
-## Learn More
+# Entrar na pasta
+cd nome-do-projeto
 
-To learn more about Next.js, take a look at the following resources:
+# Instalar as dependências
+npm install
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Rodar em ambiente de desenvolvimento
+npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+O projeto estará disponível em `http://localhost:3000`.
 
-## Deploy on Vercel
+## 🔑 Credenciais de teste (DummyJSON)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+A DummyJSON disponibiliza usuários fictícios para teste. Exemplo:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Usuário:** `emilys`
+- **Senha:** `emilyspass`
+
+Consulte a [documentação da DummyJSON](https://dummyjson.com/docs/auth) para mais usuários disponíveis.
