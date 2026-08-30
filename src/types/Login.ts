@@ -1,4 +1,9 @@
-export type User = {
+export type LoginPayload = {
+    username: string
+    password: string
+}
+
+export type LoginResponse = {
     id: number
     username: string
     email: string
@@ -9,4 +14,3 @@ export type User = {
     accessToken: string
     refreshToken: string
 }
-
