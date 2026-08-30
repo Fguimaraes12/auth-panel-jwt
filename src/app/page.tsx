@@ -1,7 +1,9 @@
-import Image from "next/image";
+import LoginForm from '@/componentes/form/LoginForm'
 
 export default function Home() {
-  return (
-    <div>Teste PR</div>
-  );
+    return (
+        <div>
+            <LoginForm />
+        </div>
+    )
 }
