@@ -4,7 +4,7 @@ import { useLogin } from '@/hooks/useLogin'
 import { useState } from 'react'
 
 export default function LoginForm() {
-    const { mutate, data, isPending, isError } = useLogin()
+    const { mutate, isPending, isError } = useLogin()
     const [loginForm, setLoginForm] = useState({
         username: '',
         password: '',
@@ -17,7 +17,6 @@ export default function LoginForm() {
 
     return (
         <div>
-            <h1>{JSON.stringify(data)}</h1>
             <form onSubmit={handleSubmit}>
                 <input
                     type="text"

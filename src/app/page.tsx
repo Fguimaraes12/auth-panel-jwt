@@ -1,9 +1,11 @@
-import LoginForm from '@/componentes/form/LoginForm'
+import Link from 'next/link'
 
 export default function Home() {
     return (
         <div>
-            <LoginForm />
+            <Link href={'/login'}>
+                <button>Fazer login</button>
+            </Link>
         </div>
     )
 }
