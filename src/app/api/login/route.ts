@@ -22,11 +22,11 @@ export async function POST(request: Request) {
     const response = NextResponse.json(data)
 
     response.cookies.set('token', data.accessToken, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'strict',
-        path: '/',
-        maxAge: 60 * 60,
+        httpOnly: true, // ele fala para o navegador não deixar o JS ler o cookie (document.cookie não enxerga).
+        secure: process.env.NODE_ENV === 'production', // secure automático: true em HTTPS (produção), false em HTTP (localhost)
+        sameSite: 'strict', // não envia este cookie em pedidos vindos de outros sites (anti-CSRF)
+        path: '/', // em quais rotas o navegador deve enviar o cookie., Se fosse '/dashboard' → só mandaria dentro de /dashboard.
+        maxAge: 60 * 60, // tempo de expiração do token
     })
 
     return response
