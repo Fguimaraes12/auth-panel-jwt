@@ -6,6 +6,7 @@ import { useQuery } from '@tanstack/react-query'
 export default function useUser() {
     return useQuery({
         queryKey: ['user'],
+        retry: false,
         queryFn: async () => {
             const { data } = await api.get('/api/me')
             return data
